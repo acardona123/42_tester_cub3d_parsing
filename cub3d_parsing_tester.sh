@@ -42,6 +42,7 @@ if [ $failed -ne 0 ]; then
     for f in "${failed_files[@]}"; do
         echo "  $f"
     done
+    echo "-> Test those files manually and discuss about those fail, some may just be due to a different interpretation of the subject."
     exit 1
 else
     exit
