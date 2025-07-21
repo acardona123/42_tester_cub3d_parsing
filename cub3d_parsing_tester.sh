@@ -20,7 +20,11 @@ while IFS= read -r -d '' mapfile; do
     ((total++))
     timeout 2 "$CUB3D_EXEC" "$mapfile" > /dev/null 2>&1
     exit_code=$?
-    if [ $exit_code -ne 0 ] && [ $exit_code -ne 124 ]; then
+    if [ $exit_code -eq 139 ]; then
+        echo "[SEGV] $mapfile (segmentation fault)"
+        ((failed++))
+        failed_files+=("$mapfile")
+    elif [ $exit_code -ne 0 ] && [ $exit_code -ne 124 ]; then
         echo "[OK]   $mapfile"
         ((passed++))
     else
