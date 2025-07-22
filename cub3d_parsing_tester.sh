@@ -4,7 +4,7 @@ CUB3D_PATH="${1:-.}"
 CUB3D_EXEC="$CUB3D_PATH/cub3D"
 MAPS_DIR="invalid_maps"
 
-echo "Testing $CUB3D_EXEC."
+echo "Testing $CUB3D_EXEC"
 
 if [ ! -x "$CUB3D_EXEC" ]; then
     echo "Error: $CUB3D_EXEC not found or not executable."
