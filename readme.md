@@ -8,7 +8,7 @@ This tester is designed to validate the parsing functionality of the Cub3D progr
 
 
 > **⚠️ WARNING:**
-> Detected error can be resulting of a specific syntax that **I** decided to tag as incorrect. But some of them can be discussed and justified during the correction. **Do not automatically consider a potential error as a fail during the correction!** Try the failed tests manually and discuss it.
+> Detected errors can be resulting of a specific syntax that **I** decided to tag as incorrect. But some of them can be discussed and justified during the correction. **Do not automatically consider a potential error as a failure during the correction!** Try the failed tests manually and discuss it.
 
 ## Requirements
 
