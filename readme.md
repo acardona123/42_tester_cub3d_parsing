@@ -12,7 +12,7 @@ This tester is designed to validate the parsing functionality of the Cub3D progr
 
 ## Requirements
 
-The `Cub3D` executable must return an exit code different from `0` (success) and `124` (timeout) and `139` (segfault) when a parsing error occurs.
+The `Cub3D` executable must return an exit code different from `0` (success) and `124` (timeout) and `139` (custom value for segfault) when a parsing error occurs.
 
 ## Usage
 
@@ -27,18 +27,32 @@ The `Cub3D` executable must return an exit code different from `0` (success) and
    ```
 
 3. **Run the tester:**
-   - **Option 1:** Provide the path to the directory containing your `Cub3D` executable:
-     ```bash
-     ./test_maps.sh /path/to/cub3d_directory
-     ```
-   - **Option 2:** Copy your `Cub3D` executable into the tester directory and run the script without arguments:
-     ```bash
-     cp /path/to/Cub3D ./Cub3D
-     ./test_maps.sh
-     ```
+   ```bash
+   ./test_maps.sh [/path/to/cub3d_directory] [-v]
+   ```
+   - optional `/path/to/cub3d_directory`: if given, then points to the directory that contains the tested cub3D executable. If not provided then the current directory is used.
+   - optional `-v`: if present the cub3D is tested with valgrind to check memory leaks, invalid read/write and so on. **Warning** : this slows down the tests quite significantly.
 
-## Note
+
+If some tests fails with a timeout message instead of passing, which can occur if your Cub3D parsing step is veryyyyyy slow, then manually increase the values of the variables `TIMEOUT_CLASSIC` and `TIMEOUT_VALGRIND` in the script.
+
+> **⚠️ WARNING:**
+> If your bonuses depends on an external library that generate leaks that are unavoidable (like the mlx when using the mlx_mouse_hide function), then the tester will fail because of those. To correct ignore those leaks:
+> 1. **Create a executable that reproduce the leak**
+> 2. **Navigate to the valgrind suppressions directory:**
+>    ```bash
+>    cd <tester_destination_path>/valgrind_suppr
+>    ```
+> 3. **Run the suppression generator**
+>    ```bash
+>    ./generate_valgrind_extra_suppressions.sh <exec_generating_the_leak> <name_to_save_the_leak_file>
+>    ```
+
+
+## Notes
 Cub3D uses a graphical library called **mlx** that creates a window as soon as it is initialized, even before textures are imported. Therefore, it is highly likely that during the tests, such windows will be briefly opened.
 The tester detects that a parsing error has not been properly managed by finding that the Cub3D program segfaulted or started the game despite the invalidity of the map.
 
 If you find any other parsing test case to add about invalid maps please contact me and i'll be glad to include them.
+
+And most importantly: have fun with the project !

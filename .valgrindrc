@@ -1,0 +1,1 @@
+--suppressions="valgrind_suppr/valgrind_suppr_mlx_mouse_hide"
